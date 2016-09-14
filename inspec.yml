@@ -5,6 +5,6 @@ copyright: Hardening Framework Team, Chef Software Inc.
 copyright_email: hello@dev-sec.io
 license: Apache 2 license
 summary: Demonstrates the use of InSpec's SSL resource
-version: 1.1.0
+version: 1.1.1
 supports:
-  - inspec: 0.33.2
+  - inspec: '>= 0.33.2'
