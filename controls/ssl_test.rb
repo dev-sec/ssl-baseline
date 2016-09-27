@@ -18,40 +18,61 @@
 
 # Valid protocols are: ssl2, ssl3, tls1.0, tls1.1, tls1.2
 
+invalid_targets = %w{
+  127.0.0.1
+  0.0.0.0
+  ::1
+  ::
+}
+
+target_hostname = command('hostname').stdout.strip
+
 # Find all TCP ports on the system, IPv4 and IPv6
 # Eliminate duplicate ports for cleaner reporting and faster scans
-sslports = port.protocols(/tcp/).entries.uniq do |entry|
+tcpports = port.protocols(/tcp/).entries.uniq do |entry|
   entry['port']
 end
 
-# Filter out ports that don't respond to any version of SSL
-sslports = sslports.find_all do |socket|
-  ssl(port: socket.port).enabled?
-  # ssl(port: tcp_port, timeout: 8, retries: 1).enabled?
+# Sort the array by port number
+tcpports = tcpports.sort_by do |entry|
+  entry['port']
 end
 
-control 'tls1.2' do
-  title 'Run TLS 1.2 whenever SSL is active on a port'
-  impact 0.5
+# Make tcpports an array of hashes to be passed to the ssl resource
+tcpports = tcpports.map do |socket|
+  params = { port: socket.port }
+  # Add a host param if the listening address of the port is a valid/non-localhost IP
+  params[:host] = socket.address unless invalid_targets.include?(socket.address)
+  params[:socket] = socket
+  params
+end
 
-  sslports.each do |socket|
-    # create a description
-    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
-    describe ssl(port: socket.port).protocols('tls1.2') do
-      it(proc_desc) { should be_enabled }
-      it { should be_enabled }
-    end
+# Filter out ports that don't respond to any version of SSL
+sslports = tcpports.find_all do |tcpport|
+  ssl(tcpport).enabled?
+end
+
+# Troubleshooting control to show InSpec version and list
+# discovered tcp ports and the ssl enabled ones. Always succeeds
+control 'debugging' do
+  title "Inspec::Version=#{Inspec::VERSION}"
+  impact 0.0
+  describe "tcpports=\n#{tcpports.join("\n")}" do
+    it { should_not eq nil }
+  end
+  describe "sslports=\n#{sslports.join("\n")}" do
+    it { should_not eq nil }
   end
 end
 
 control 'ssl2' do
-  title 'Disable SSL2 from all exposed SSL ports.'
+  title 'Disable SSL 2 from all exposed SSL ports.'
   impact 1.0
 
-  sslports.each do |socket|
+  sslports.each do |sslport|
     # create a description
-    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
-    describe ssl(port: socket.port).protocols('ssl2') do
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).protocols('ssl2') do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
@@ -59,13 +80,13 @@ control 'ssl2' do
 end
 
 control 'ssl3' do
-  title 'Disable SSL3 from all exposed SSL ports.'
+  title 'Disable SSL 3 from all exposed SSL ports.'
   impact 1.0
 
-  sslports.each do |socket|
+  sslports.each do |sslport|
     # create a description
-    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
-    describe ssl(port: socket.port).protocols('ssl3') do
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).protocols('ssl3') do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
@@ -73,13 +94,13 @@ control 'ssl3' do
 end
 
 control 'tls1.0' do
-  title 'Disable tls1.0 from all exposed ports.'
+  title 'Disable TLS 1.0 on exposed ports.'
   impact 0.5
 
-  sslports.each do |socket|
+  sslports.each do |sslport|
     # create a description
-    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
-    describe ssl(port: socket.port).protocols('tls1.0') do
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).protocols('tls1.0') do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
@@ -87,15 +108,29 @@ control 'tls1.0' do
 end
 
 control 'tls1.1' do
-  title 'Disable tls1.1 from all exposed ports.'
+  title 'Disable TLS 1.1 on exposed ports.'
   impact 0.5
 
-  sslports.each do |socket|
+  sslports.each do |sslport|
     # create a description
-    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
-    describe ssl(port: socket.port).protocols('tls1.1') do
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).protocols('tls1.1') do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
+    end
+  end
+end
+
+control 'tls1.2' do
+  title 'Enable TLS 1.2 on exposed ports.'
+  impact 0.5
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).protocols('tls1.2') do
+      it(proc_desc) { should be_enabled }
+      it { should be_enabled }
     end
   end
 end
@@ -104,10 +139,10 @@ control 'rc4' do
   title 'Disable RC4 ciphers from all exposed SSL/TLS ports and versions.'
   impact 0.5
 
-  sslports.each do |socket|
+  sslports.each do |sslport|
     # create a description
-    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
-    describe ssl(port: socket.port).ciphers(/rc4/i) do
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/rc4/i) do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
