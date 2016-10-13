@@ -25,6 +25,9 @@ invalid_targets = %w{
   ::
 }
 
+# Array of TCP ports to exclude from SSL checking. For example: [443, 8443]
+exclude_ports = []
+
 target_hostname = command('hostname').stdout.strip
 
 # Find all TCP ports on the system, IPv4 and IPv6
@@ -49,7 +52,7 @@ end
 
 # Filter out ports that don't respond to any version of SSL
 sslports = tcpports.find_all do |tcpport|
-  ssl(tcpport).enabled?
+  !exclude_ports.include?(tcpport[:port]) && ssl(tcpport).enabled?
 end
 
 # Troubleshooting control to show InSpec version and list
