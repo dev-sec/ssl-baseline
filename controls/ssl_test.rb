@@ -151,3 +151,17 @@ control 'rc4' do
     end
   end
 end
+
+control 'export' do
+  title 'Disable EXPORT ciphers from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+
+  sslports.each do |socket|
+    # create a description
+    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
+    describe ssl(port: socket.port).ciphers(/export/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
