@@ -165,3 +165,59 @@ control 'export' do
     end
   end
 end
+
+control 'des' do
+  title 'Disable DES ciphers from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+
+  sslports.each do |socket|
+    # create a description
+    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
+    describe ssl(port: socket.port).ciphers(/des/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'enull' do
+  title 'Disable eNULL ciphers from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+
+  sslports.each do |socket|
+    # create a description
+    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
+    describe ssl(port: socket.port).ciphers(/null/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'anull' do
+  title 'Disable aNULL ciphers from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+
+  sslports.each do |socket|
+    # create a description
+    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
+    describe ssl(port: socket.port).ciphers(/dh_anon/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'md5' do
+  title 'Disable md5 mac from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+
+  sslports.each do |socket|
+    # create a description
+    proc_desc = "on node == #{command('hostname').stdout.strip} running #{socket.process.inspect} (#{socket.pid})"
+    describe ssl(port: socket.port).ciphers(/md5/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
