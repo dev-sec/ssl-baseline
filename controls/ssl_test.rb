@@ -18,12 +18,12 @@
 
 # Valid protocols are: ssl2, ssl3, tls1.0, tls1.1, tls1.2
 
-invalid_targets = %w{
+invalid_targets = %w(
   127.0.0.1
   0.0.0.0
   ::1
   ::
-}
+)
 
 # Array of TCP ports to exclude from SSL checking. For example: [443, 8443]
 exclude_ports = []
