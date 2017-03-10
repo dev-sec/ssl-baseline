@@ -71,6 +71,7 @@ end
 control 'ssl2' do
   title 'Disable SSL 2 from all exposed SSL ports.'
   impact 1.0
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -85,6 +86,7 @@ end
 control 'ssl3' do
   title 'Disable SSL 3 from all exposed SSL ports.'
   impact 1.0
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -99,6 +101,7 @@ end
 control 'tls1.0' do
   title 'Disable TLS 1.0 on exposed ports.'
   impact 0.5
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -113,6 +116,7 @@ end
 control 'tls1.1' do
   title 'Disable TLS 1.1 on exposed ports.'
   impact 0.5
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -127,6 +131,7 @@ end
 control 'tls1.2' do
   title 'Enable TLS 1.2 on exposed ports.'
   impact 0.5
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -141,6 +146,7 @@ end
 control 'rc4' do
   title 'Disable RC4 ciphers from all exposed SSL/TLS ports and versions.'
   impact 0.5
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -155,6 +161,7 @@ end
 control 'export' do
   title 'Disable EXPORT ciphers from all exposed SSL/TLS ports and versions.'
   impact 0.5
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -169,6 +176,7 @@ end
 control 'des' do
   title 'Disable DES ciphers from all exposed SSL/TLS ports and versions.'
   impact 0.5
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -183,6 +191,7 @@ end
 control 'enull' do
   title 'Disable eNULL ciphers from all exposed SSL/TLS ports and versions.'
   impact 0.5
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -197,6 +206,7 @@ end
 control 'anull' do
   title 'Disable aNULL ciphers from all exposed SSL/TLS ports and versions.'
   impact 0.5
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
@@ -211,6 +221,7 @@ end
 control 'md5' do
   title 'Disable md5 mac from all exposed SSL/TLS ports and versions.'
   impact 0.5
+  only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
