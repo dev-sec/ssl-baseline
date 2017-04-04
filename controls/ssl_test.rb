@@ -143,6 +143,21 @@ control 'tls1.2' do
   end
 end
 
+control 'cbc' do
+  title 'Disable CBC ciphers from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/cbc/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
 control 'rc4' do
   title 'Disable RC4 ciphers from all exposed SSL/TLS ports and versions.'
   impact 0.5
