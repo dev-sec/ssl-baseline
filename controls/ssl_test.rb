@@ -16,8 +16,6 @@
 # author: Christoph Hartmann
 # author: Alex Pop
 
-# Valid protocols are: ssl2, ssl3, tls1.0, tls1.1, tls1.2
-
 invalid_targets = %w(
   127.0.0.1
   0.0.0.0
@@ -68,6 +66,11 @@ control 'debugging' do
   end
 end
 
+#######################################################
+# Protocol Tests                                      #
+# Valid protocols are: tls1.2                         #
+# Invalid protocols are : ssl2, ssl3, tls1.0, tls1.1  #
+#######################################################
 control 'ssl2' do
   title 'Disable SSL 2 from all exposed SSL ports.'
   impact 1.0
@@ -142,6 +145,22 @@ control 'tls1.2' do
     end
   end
 end
+
+#######################################################
+# Key Exchange (Kx) Tests                             #
+# Valid Kx(s) are: ECDHE                              #
+#######################################################
+
+#######################################################
+# Authentication (Au) Tests                           #
+# Valid Au(s) are: ECDSA, RSA                         #
+#######################################################
+
+#######################################################
+# Symmetric Encryption Method (Enc) Tests             #
+# Valid Enc modes are:                                #
+# AES256, AES128, AES256-GCM AES128-GCM               #
+#######################################################
 
 control 'cbc' do
   title 'Disable CBC ciphers from all exposed SSL/TLS ports and versions.'
@@ -232,6 +251,11 @@ control 'anull' do
     end
   end
 end
+
+#######################################################
+# Message Authentication Code (Mac) Tests             #
+# Valid Mac(s) are: SHA384, SHA256, AEAD              #
+#######################################################
 
 control 'md5' do
   title 'Disable md5 mac from all exposed SSL/TLS ports and versions.'
