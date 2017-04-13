@@ -23,6 +23,8 @@ $ inspec exec https://github.com/dev-sec/ssl-benchmark
 * Dominik Richter [arlimus](https://github.com/arlimus)
 * Christoph Hartmann [chris-rock](https://github.com/chris-rock)
 * Alex Pop [alexpop](https://github.com/alexpop)
+* Patrick Münch [atomic111](https://github.com/atomic111)
+* Christoph Kappel [supergicko](https://github.com/supergicko)
 
 ## License and Author
 

@@ -15,6 +15,8 @@
 # author: Dominik Richter
 # author: Christoph Hartmann
 # author: Alex Pop
+# author: Patrick Münch
+# author: Christoph Kappel
 
 invalid_targets = %w(
   127.0.0.1
@@ -151,7 +153,7 @@ end
 # Valid Kx(s) are: ECDHE                              #
 #######################################################
 control 'kx-ecdh' do
-  title 'Enable ECDH as KX'
+  title 'Enable ECDH as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -166,7 +168,7 @@ control 'kx-ecdh' do
 end
 
 control 'kx-rsa' do
-  title 'Disable RSA as KX'
+  title 'Disable RSA as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -181,7 +183,7 @@ control 'kx-rsa' do
 end
 
 control 'kx-dh' do
-  title 'Disable DH as KX'
+  title 'Disable DH as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -196,7 +198,7 @@ control 'kx-dh' do
 end
 
 control 'kx-krb5' do
-  title 'Disable KRB5 as KX'
+  title 'Disable KRB5 as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -211,7 +213,7 @@ control 'kx-krb5' do
 end
 
 control 'kx-psk' do
-  title 'Disable PSK as KX'
+  title 'Disable PSK as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -226,7 +228,7 @@ control 'kx-psk' do
 end
 
 control 'kx-gostr' do
-  title 'Disable GOSTR as KX'
+  title 'Disable GOSTR as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -241,7 +243,7 @@ control 'kx-gostr' do
 end
 
 control 'kx-srp' do
-  title 'Disable SRP as KX'
+  title 'Disable SRP as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -261,7 +263,7 @@ end
 #######################################################
 
 control 'au-ecdsa-rsa' do
-  title 'Enable ECDSA or RSA as AU'
+  title 'Enable ECDSA or RSA as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -276,7 +278,7 @@ control 'au-ecdsa-rsa' do
 end
 
 control 'au-anon' do
-  title 'Disable ANON as AU'
+  title 'Disable ANON as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -291,7 +293,7 @@ control 'au-anon' do
 end
 
 control 'au-dss' do
-  title 'Disable DSS as AU'
+  title 'Disable DSS as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -306,7 +308,7 @@ control 'au-dss' do
 end
 
 control 'au-psk' do
-  title 'Disable PSK as AU'
+  title 'Disable PSK as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -321,7 +323,7 @@ control 'au-psk' do
 end
 
 control 'au-export' do
-  title 'Disable EXPORT as AU'
+  title 'Disable EXPORT as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
@@ -431,21 +433,6 @@ control 'enc-enull' do
   end
 end
 
-control 'enc-anull' do
-  title 'Disable aNULL as ENC from all exposed SSL/TLS ports and versions.'
-  impact 0.5
-  only_if { sslports.length > 0 }
-
-  sslports.each do |sslport|
-    # create a description
-    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).ciphers(/WITH_ANON/i) do
-      it(proc_desc) { should_not be_enabled }
-      it { should_not be_enabled }
-    end
-  end
-end
-
 control 'enc-camellia' do
   title 'Disable CAMELLIA as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
@@ -491,20 +478,80 @@ control 'enc-idea' do
   end
 end
 
-#######################################################
-# Message Authentication Code (Mac) Tests             #
-# Valid Mac(s) are: SHA384, SHA256, AEAD              #
-#######################################################
-
-control 'md5' do
-  title 'Disable md5 mac from all exposed SSL/TLS ports and versions.'
+control 'enc-aes-ccm' do
+  title 'Disable AES-CCM from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
     proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).ciphers(/md5/i) do
+    describe ssl(sslport).ciphers(/(WITH_AES_(\w+)_(CCM))/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+#######################################################
+# Message Authentication Code (Mac) Tests             #
+# Valid Mac(s) are: SHA384, SHA256, AEAD, POLY1305    #
+#######################################################
+
+control 'mac-sha384-sha256-poly1305' do
+  title 'Enable SHA384 or SHA256 or POLY1305 as Mac from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/_(SHA384|SHA256|POLY1305)$/i) do
+      it(proc_desc) { should be_enabled }
+      it { should be_enabled }
+    end
+  end
+end
+
+control 'mac-md5' do
+  title 'Disable MD5 Mac from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/_MD5$/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'mac-sha' do
+  title 'Disable SHA(1) Mac from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/_SHA$/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'mac-null' do
+  title 'Disable NULL Mac from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/_NULL$/i) do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
