@@ -338,93 +338,153 @@ end
 #######################################################
 # Symmetric Encryption Method (Enc) Tests             #
 # Valid Enc modes are:                                #
-# AES256, AES128, AES256-GCM AES128-GCM               #
+# AES256, AES128, AES256-GCM, AES128-GCM, CHACHA20    #
 #######################################################
 
-control 'cbc' do
-  title 'Disable CBC ciphers from all exposed SSL/TLS ports and versions.'
+control 'enc-aes-gcm-chacha20' do
+  title 'Enable AES256 or AES128 or AES256-GCM or AES128-GCM or CHACHA20 as Enc'
   impact 0.5
   only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
     proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).ciphers(/cbc/i) do
+    describe ssl(sslport).ciphers(/WITH_(AES_256|AES_128|CHACHA20|AES_256_GCM|AES_128_GCM)/i) do
+      it(proc_desc) { should be_enabled }
+      it { should be_enabled }
+    end
+  end
+end
+
+control 'enc-cbc' do
+  title 'Disable CBC as ENC from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/(WITH_(\w+)_(CBC))/i) do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
   end
 end
 
-control 'rc4' do
-  title 'Disable RC4 ciphers from all exposed SSL/TLS ports and versions.'
+control 'enc-rc4' do
+  title 'Disable RC4 as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
     proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).ciphers(/rc4/i) do
+    describe ssl(sslport).ciphers(/WITH_RC4/i) do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
   end
 end
 
-control 'export' do
-  title 'Disable EXPORT ciphers from all exposed SSL/TLS ports and versions.'
+control 'enc-export' do
+  title 'Disable EXPORT as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
     proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).ciphers(/export/i) do
+    describe ssl(sslport).ciphers(/WITH_EXPORT/i) do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
   end
 end
 
-control 'des' do
-  title 'Disable DES ciphers from all exposed SSL/TLS ports and versions.'
+control 'enc-des' do
+  title 'Disable DES, 3DES as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
     proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).ciphers(/des/i) do
+    describe ssl(sslport).ciphers(/(WITH_(\d*)(des))/i) do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
   end
 end
 
-control 'enull' do
-  title 'Disable eNULL ciphers from all exposed SSL/TLS ports and versions.'
+control 'enc-enull' do
+  title 'Disable eNULL as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
     proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).ciphers(/null/i) do
+    describe ssl(sslport).ciphers(/WITH_NULL/i) do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
   end
 end
 
-control 'anull' do
-  title 'Disable aNULL ciphers from all exposed SSL/TLS ports and versions.'
+control 'enc-anull' do
+  title 'Disable aNULL as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
   only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
     proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).ciphers(/dh_anon/i) do
+    describe ssl(sslport).ciphers(/WITH_ANON/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'enc-camellia' do
+  title 'Disable CAMELLIA as ENC from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/WITH_CAMELLIA/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'enc-seed' do
+  title 'Disable SEED as ENC from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/WITH_SEED/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'enc-idea' do
+  title 'Disable IDEA as ENC from all exposed SSL/TLS ports and versions.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/WITH_IDEA/i) do
       it(proc_desc) { should_not be_enabled }
       it { should_not be_enabled }
     end
