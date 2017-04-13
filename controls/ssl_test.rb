@@ -225,21 +225,6 @@ control 'kx-psk' do
   end
 end
 
-control 'kx-ck' do
-  title 'Disable CK as KX'
-  impact 0.5
-  only_if { sslports.length > 0 }
-
-  sslports.each do |sslport|
-    # create a description
-    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).ciphers(/^SSL_CK/i) do
-      it(proc_desc) { should_not be_enabled }
-      it { should_not be_enabled }
-    end
-  end
-end
-
 control 'kx-gostr' do
   title 'Disable GOSTR as KX'
   impact 0.5
@@ -274,6 +259,81 @@ end
 # Authentication (Au) Tests                           #
 # Valid Au(s) are: ECDSA, RSA                         #
 #######################################################
+
+control 'au-ecdsa-rsa' do
+  title 'Enable ECDSA or RSA as AU'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/(RSA|ECDSA)_WITH/i) do
+      it(proc_desc) { should be_enabled }
+      it { should be_enabled }
+    end
+  end
+end
+
+control 'au-anon' do
+  title 'Disable ANON as AU'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/ANON_WITH/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'au-dss' do
+  title 'Disable DSS as AU'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/DSS_WITH/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'au-psk' do
+  title 'Disable PSK as AU'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/PSK_WITH/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
+
+control 'au-export' do
+  title 'Disable EXPORT as AU'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/((EXPORT)(\d*)_WITH)/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end
 
 #######################################################
 # Symmetric Encryption Method (Enc) Tests             #
