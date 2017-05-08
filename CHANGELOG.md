@@ -1,7 +1,16 @@
 # Change Log
 
-## [1.2.0](https://github.com/dev-sec/ssl-baseline/tree/1.2.0) (2017-03-10)
-[Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/v1.1.1...1.2.0)
+## [1.3.0](https://github.com/dev-sec/ssl-baseline/tree/1.3.0) (2017-05-08)
+[Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/v1.2.0...1.3.0)
+
+**Merged pull requests:**
+
+- Test for all [\#10](https://github.com/dev-sec/ssl-baseline/pull/10) ([supergicko](https://github.com/supergicko))
+- restrict ruby testing to version 2.3.3 [\#9](https://github.com/dev-sec/ssl-baseline/pull/9) ([atomic111](https://github.com/atomic111))
+- Added control check for disabled CBC [\#8](https://github.com/dev-sec/ssl-baseline/pull/8) ([supergicko](https://github.com/supergicko))
+
+## [v1.2.0](https://github.com/dev-sec/ssl-baseline/tree/v1.2.0) (2017-03-10)
+[Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/v1.1.3...v1.2.0)
 
 **Merged pull requests:**
 
@@ -9,6 +18,12 @@
 - Sslports bug [\#6](https://github.com/dev-sec/ssl-baseline/pull/6) ([supergicko](https://github.com/supergicko))
 - add common files [\#5](https://github.com/dev-sec/ssl-baseline/pull/5) ([atomic111](https://github.com/atomic111))
 - controls for export, des, aNULL, eNULL ciphers + md5 mac [\#4](https://github.com/dev-sec/ssl-baseline/pull/4) ([supergicko](https://github.com/supergicko))
+
+## [v1.1.3](https://github.com/dev-sec/ssl-baseline/tree/v1.1.3) (2017-02-03)
+[Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/v1.1.1...v1.1.3)
+
+**Merged pull requests:**
+
 - target addresses of listening ports and add control for troubleshooting [\#3](https://github.com/dev-sec/ssl-baseline/pull/3) ([alexpop](https://github.com/alexpop))
 
 ## [v1.1.1](https://github.com/dev-sec/ssl-baseline/tree/v1.1.1) (2016-09-14)
