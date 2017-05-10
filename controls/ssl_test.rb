@@ -18,28 +18,34 @@
 # author: Patrick Münch
 # author: Christoph Kappel
 
-invalid_targets = %w(
-  127.0.0.1
-  0.0.0.0
-  ::1
-  ::
+invalid_targets = attribute(
+  'invalid_targets',
+  default: [
+    '127.0.0.1',
+    '0.0.0.0',
+    '::1',
+    '::'
+  ],
+  description: 'Array of IPv4 and IPv6 Addresses to exclude'
 )
 
 # Array of TCP ports to exclude from SSL checking. For example: [443, 8443]
-exclude_ports = []
+exclude_ports = attribute(
+  'exclude_ports',
+  default: [],
+  description: 'Array of TCP ports to exclude from SSL checking'
+)
 
-target_hostname = command('hostname').stdout.strip
+target_hostname = attribute(
+  'target_hostname',
+  default: command('hostname').stdout.strip,
+  description: 'Target hostname to check'
+)
 
 # Find all TCP ports on the system, IPv4 and IPv6
-# Eliminate duplicate ports for cleaner reporting and faster scans
-tcpports = port.protocols(/tcp/).entries.uniq do |entry|
-  entry['port']
-end
-
-# Sort the array by port number
-tcpports = tcpports.sort_by do |entry|
-  entry['port']
-end
+# Eliminate duplicate ports for cleaner reporting and faster scans and sort the
+# array by port number.
+tcpports = port.protocols(/tcp/).entries.uniq.sort_by { |entry| entry['port'] }
 
 # Make tcpports an array of hashes to be passed to the ssl resource
 tcpports = tcpports.map do |socket|
