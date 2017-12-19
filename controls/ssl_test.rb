@@ -563,3 +563,21 @@ control 'mac-null' do
     end
   end
 end
+
+control 'robotattack' do
+  title "Return Of Bleichenbacher's Oracle Threat"
+  desc 'ROBOT is the return of a 19-year-old vulnerability that allows performing RSA decryption and signing operations with the private key of a TLS server.'
+  ref "Paper: Return Of Bleichenbacher's Oracle Threat (ROBOT)", url: 'https://ia.cr/2017/1189'
+  tag 'sslattack', 'tlsattack'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).ciphers(/^TLS_RSA/i) do
+      it(proc_desc) { should_not be_enabled }
+      it { should_not be_enabled }
+    end
+  end
+end

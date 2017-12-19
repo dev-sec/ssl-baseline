@@ -1,7 +1,7 @@
 ssl-baseline
 ===================
 
-This Compliance Profile demonstrates the use of InSpec's [SSL resource](https://www.inspec.io/docs/reference/resources/ssl/)
+This Compliance Profile demonstrates the use of InSpec's [SSL resource](https://www.inspec.io/docs/reference/resources/ssl/) by enforcing strong TLS configuration.
 
 The tests are based on
 - [Mozillas TLS Guidelines](https://wiki.mozilla.org/Security/Server_Side_TLS)
@@ -13,15 +13,19 @@ The tests are based on
 Requires [InSpec](https://github.com/chef/inspec) 1.21.0 or newer for execution:
 
 ```
-$ git clone https://github.com/dev-sec/ssl-benchmark
-$ inspec exec ssl-benchmark
+$ git clone https://github.com/dev-sec/ssl-baseline
+$ inspec exec ssl-baseline
 ```
 
 You can also execute the profile directly from Github:
 
 ```
-$ inspec exec https://github.com/dev-sec/ssl-benchmark
+$ inspec exec https://github.com/dev-sec/ssl-baseline
 ```
+
+## Covered Attacks / Weaknesses
+
+- [Return Of Bleichenbacher's Oracle Threat (ROBOT)](https://robotattack.org/)
 
 ## Contributors + Kudos
 
