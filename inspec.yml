@@ -7,4 +7,5 @@ copyright_email: hello@dev-sec.io
 license: Apache-2.0
 version: 1.3.0
 supports:
-  - inspec: '>= 1.21.0'
+  - inspec_version: '>= 1.21.0'
+  - os-family: unix
