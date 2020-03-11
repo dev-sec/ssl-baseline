@@ -40,6 +40,12 @@ target_hostname = attribute(
   description: 'Target hostname to check'
 )
 
+force_ssl = attribute(
+  'force_ssl',
+  default: false,
+  description: 'The profile should not check if SSL is enabled on every port and assume it is'
+)
+
 # Find all TCP ports on the system, IPv4 and IPv6
 # Eliminate duplicate ports for cleaner reporting and faster scans and sort the
 # array by port number.
@@ -56,7 +62,7 @@ end
 
 # Filter out ports that don't respond to any version of SSL
 sslports = tcpports.find_all do |tcpport|
-  !exclude_ports.include?(tcpport[:port]) && ssl(tcpport).enabled?
+  !exclude_ports.include?(tcpport[:port]) && (ssl(tcpport).enabled? if !force_ssl)
 end
 
 # Troubleshooting control to show InSpec version and list
