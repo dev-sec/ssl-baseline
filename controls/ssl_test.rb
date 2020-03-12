@@ -62,7 +62,11 @@ end
 
 # Filter out ports that don't respond to any version of SSL
 sslports = tcpports.find_all do |tcpport|
-  !exclude_ports.include?(tcpport[:port]) && (ssl(tcpport).enabled? unless force_ssl)
+  if force_ssl
+    !exclude_ports.include?(tcpport[:port])
+  else
+    !exclude_ports.include?(tcpport[:port]) && ssl(tcpport).enabled?
+  end
 end
 
 # Troubleshooting control to show InSpec version and list
