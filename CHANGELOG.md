@@ -1,5 +1,13 @@
 # Change Log
 
+## [1.5.0](https://github.com/dev-sec/ssl-baseline/tree/1.5.0) (2020-03-13)
+[Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.5.0...1.5.0)
+
+**Merged pull requests:**
+
+- debug force\_ssl [\#30](https://github.com/dev-sec/ssl-baseline/pull/30) ([micheelengronne](https://github.com/micheelengronne))
+- Update for Inspec 4 [\#29](https://github.com/dev-sec/ssl-baseline/pull/29) ([micheelengronne](https://github.com/micheelengronne))
+
 ## [1.5.0](https://github.com/dev-sec/ssl-baseline/tree/1.5.0) (2020-03-12)
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.4.0...1.5.0)
 
@@ -33,6 +41,7 @@
 - Test for all [\#10](https://github.com/dev-sec/ssl-baseline/pull/10) ([supergicko](https://github.com/supergicko))
 - restrict ruby testing to version 2.3.3 [\#9](https://github.com/dev-sec/ssl-baseline/pull/9) ([atomic111](https://github.com/atomic111))
 - Added control check for disabled CBC [\#8](https://github.com/dev-sec/ssl-baseline/pull/8) ([supergicko](https://github.com/supergicko))
+- controls for export, des, aNULL, eNULL ciphers + md5 mac [\#4](https://github.com/dev-sec/ssl-baseline/pull/4) ([supergicko](https://github.com/supergicko))
 
 ## [v1.2.0](https://github.com/dev-sec/ssl-baseline/tree/v1.2.0) (2017-03-10)
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/v1.1.3...v1.2.0)
@@ -42,7 +51,6 @@
 - Add only\_if to controls [\#7](https://github.com/dev-sec/ssl-baseline/pull/7) ([alexpop](https://github.com/alexpop))
 - Sslports bug [\#6](https://github.com/dev-sec/ssl-baseline/pull/6) ([supergicko](https://github.com/supergicko))
 - add common files [\#5](https://github.com/dev-sec/ssl-baseline/pull/5) ([atomic111](https://github.com/atomic111))
-- controls for export, des, aNULL, eNULL ciphers + md5 mac [\#4](https://github.com/dev-sec/ssl-baseline/pull/4) ([supergicko](https://github.com/supergicko))
 
 ## [v1.1.3](https://github.com/dev-sec/ssl-baseline/tree/v1.1.3) (2017-02-03)
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/v1.1.1...v1.1.3)
