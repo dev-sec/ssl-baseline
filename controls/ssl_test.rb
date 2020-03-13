@@ -18,7 +18,7 @@
 
 invalid_targets = attribute(
   'invalid_targets',
-  default: [
+  value: [
     '127.0.0.1',
     '0.0.0.0',
     '::1',
@@ -30,19 +30,19 @@ invalid_targets = attribute(
 # Array of TCP ports to exclude from SSL checking. For example: [443, 8443]
 exclude_ports = attribute(
   'exclude_ports',
-  default: [],
+  value: [],
   description: 'Array of TCP ports to exclude from SSL checking'
 )
 
 target_hostname = attribute(
   'target_hostname',
-  default: command('hostname').stdout.strip,
+  value: command('hostname').stdout.strip,
   description: 'Target hostname to check'
 )
 
 force_ssl = attribute(
   'force_ssl',
-  default: false,
+  value: false,
   description: 'The profile should not check if SSL is enabled on every port and assume it is'
 )
 
