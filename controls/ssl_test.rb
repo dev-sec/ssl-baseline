@@ -46,6 +46,12 @@ force_ssl = attribute(
   description: 'The profile should not check if SSL is enabled on every port and assume it is'
 )
 
+tls_version = attribute(
+  'tls_version',
+  value: 'tls1.2',
+  description: 'The current TLS version to check (currently tls1.2 and tls1.3)'
+)
+
 # Find all TCP ports on the system, IPv4 and IPv6
 # Eliminate duplicate ports for cleaner reporting and faster scans and sort the
 # array by port number.
@@ -147,30 +153,15 @@ control 'tls1.1' do
   end
 end
 
-control 'tls1.2' do
-  title 'Enable TLS 1.2 on exposed ports.'
+control 'tls1.2-1.3' do
+  title 'Enable TLS 1.2 or TLS 1.3 on exposed ports.'
   impact 0.5
   only_if { sslports.length > 0 }
 
   sslports.each do |sslport|
     # create a description
     proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).protocols('tls1.2') do
-      it(proc_desc) { should be_enabled }
-      it { should be_enabled }
-    end
-  end
-end
-
-control 'tls1.3' do
-  title 'Enable TLS 1.3 on exposed ports.'
-  impact 0.5
-  only_if { sslports.length > 0 }
-
-  sslports.each do |sslport|
-    # create a description
-    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
-    describe ssl(sslport).protocols('tls1.3') do
+    describe ssl(sslport).protocols(tls_version) do
       it(proc_desc) { should be_enabled }
       it { should be_enabled }
     end
