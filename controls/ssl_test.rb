@@ -84,7 +84,7 @@ end
 
 #######################################################
 # Protocol Tests                                      #
-# Valid protocols are: tls1.2                         #
+# Valid protocols are: tls1.2, tls1.3                 #
 # Invalid protocols are : ssl2, ssl3, tls1.0, tls1.1  #
 #######################################################
 control 'ssl2' do
@@ -156,6 +156,21 @@ control 'tls1.2' do
     # create a description
     proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
     describe ssl(sslport).protocols('tls1.2') do
+      it(proc_desc) { should be_enabled }
+      it { should be_enabled }
+    end
+  end
+end
+
+control 'tls1.3' do
+  title 'Enable TLS 1.3 on exposed ports.'
+  impact 0.5
+  only_if { sslports.length > 0 }
+
+  sslports.each do |sslport|
+    # create a description
+    proc_desc = "on node == #{target_hostname} running #{sslport[:socket].process.inspect} (#{sslport[:socket].pid})"
+    describe ssl(sslport).protocols('tls1.3') do
       it(proc_desc) { should be_enabled }
       it { should be_enabled }
     end
