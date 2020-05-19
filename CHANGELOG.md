@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/dev-sec/ssl-baseline/tree/HEAD)
+
+[Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.1...HEAD)
+
+**Merged pull requests:**
+
+- align versions [\#33](https://github.com/dev-sec/ssl-baseline/pull/33) ([micheelengronne](https://github.com/micheelengronne))
+
 ## [1.6.1](https://github.com/dev-sec/ssl-baseline/tree/1.6.1) (2020-05-19)
 
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.0...1.6.1)
