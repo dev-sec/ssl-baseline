@@ -1,8 +1,8 @@
 # Changelog
 
-## [1.3.1](https://github.com/dev-sec/ssl-baseline/tree/1.3.1) (2020-05-19)
+## [1.6.1](https://github.com/dev-sec/ssl-baseline/tree/1.6.1) (2020-05-19)
 
-[Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.0...1.3.1)
+[Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.0...1.6.1)
 
 **Closed issues:**
 
