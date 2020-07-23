@@ -1,11 +1,12 @@
 # Changelog
 
-## [1.6.3](https://github.com/dev-sec/ssl-baseline/tree/1.6.3) (2020-05-19)
+## [1.6.3](https://github.com/dev-sec/ssl-baseline/tree/1.6.3) (2020-07-23)
 
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.2...1.6.3)
 
 **Merged pull requests:**
 
+- The release draft references the correct SHA [\#36](https://github.com/dev-sec/ssl-baseline/pull/36) ([micheelengronne](https://github.com/micheelengronne))
 - CHANGELOG for RELEASE done before the push to avoid breaking [\#35](https://github.com/dev-sec/ssl-baseline/pull/35) ([micheelengronne](https://github.com/micheelengronne))
 
 ## [1.6.2](https://github.com/dev-sec/ssl-baseline/tree/1.6.2) (2020-05-19)

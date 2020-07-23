@@ -8,5 +8,5 @@ copyright_email: hello@dev-sec.io
 license: Apache-2.0
 version: 1.6.3
 supports:
-  - inspec_version: '>= 1.21.0'
-  - os-family: unix
+    - inspec_version: '>= 1.21.0'
+    - os-family: unix
