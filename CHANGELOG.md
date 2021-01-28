@@ -1,11 +1,12 @@
 # Changelog
 
-## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2021-01-26)
+## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2021-01-28)
 
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.3...1.6.4)
 
 **Merged pull requests:**
 
+- Fix lint [\#38](https://github.com/dev-sec/ssl-baseline/pull/38) ([schurzi](https://github.com/schurzi))
 - GitHub action [\#37](https://github.com/dev-sec/ssl-baseline/pull/37) ([rndmh3ro](https://github.com/rndmh3ro))
 
 ## [1.6.3](https://github.com/dev-sec/ssl-baseline/tree/1.6.3) (2020-07-23)
@@ -83,7 +84,6 @@
 - Test for all [\#10](https://github.com/dev-sec/ssl-baseline/pull/10) ([supergicko](https://github.com/supergicko))
 - restrict ruby testing to version 2.3.3 [\#9](https://github.com/dev-sec/ssl-baseline/pull/9) ([atomic111](https://github.com/atomic111))
 - Added control check for disabled CBC [\#8](https://github.com/dev-sec/ssl-baseline/pull/8) ([supergicko](https://github.com/supergicko))
-- target addresses of listening ports and add control for troubleshooting [\#3](https://github.com/dev-sec/ssl-baseline/pull/3) ([alexpop](https://github.com/alexpop))
 
 ## [v1.2.0](https://github.com/dev-sec/ssl-baseline/tree/v1.2.0) (2017-03-10)
 
@@ -92,6 +92,7 @@
 **Merged pull requests:**
 
 - Add only\_if to controls [\#7](https://github.com/dev-sec/ssl-baseline/pull/7) ([alexpop](https://github.com/alexpop))
+- Sslports bug [\#6](https://github.com/dev-sec/ssl-baseline/pull/6) ([supergicko](https://github.com/supergicko))
 - add common files [\#5](https://github.com/dev-sec/ssl-baseline/pull/5) ([atomic111](https://github.com/atomic111))
 - controls for export, des, aNULL, eNULL ciphers + md5 mac [\#4](https://github.com/dev-sec/ssl-baseline/pull/4) ([supergicko](https://github.com/supergicko))
 
@@ -101,7 +102,7 @@
 
 **Merged pull requests:**
 
-- Sslports bug [\#6](https://github.com/dev-sec/ssl-baseline/pull/6) ([supergicko](https://github.com/supergicko))
+- target addresses of listening ports and add control for troubleshooting [\#3](https://github.com/dev-sec/ssl-baseline/pull/3) ([alexpop](https://github.com/alexpop))
 
 ## [v1.1.1](https://github.com/dev-sec/ssl-baseline/tree/v1.1.1) (2016-09-14)
 
