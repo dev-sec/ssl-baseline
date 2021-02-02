@@ -1,11 +1,12 @@
 # Changelog
 
-## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2021-01-28)
+## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2021-02-02)
 
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.3...1.6.4)
 
 **Merged pull requests:**
 
+- use version tag for changelog action [\#39](https://github.com/dev-sec/ssl-baseline/pull/39) ([schurzi](https://github.com/schurzi))
 - Fix lint [\#38](https://github.com/dev-sec/ssl-baseline/pull/38) ([schurzi](https://github.com/schurzi))
 - GitHub action [\#37](https://github.com/dev-sec/ssl-baseline/pull/37) ([rndmh3ro](https://github.com/rndmh3ro))
 
@@ -38,6 +39,7 @@
 **Merged pull requests:**
 
 - github actions [\#32](https://github.com/dev-sec/ssl-baseline/pull/32) ([micheelengronne](https://github.com/micheelengronne))
+- avoid inspec depricated warning in inspec version 1.51.18 [\#19](https://github.com/dev-sec/ssl-baseline/pull/19) ([Viktor-ret](https://github.com/Viktor-ret))
 
 ## [1.6.0](https://github.com/dev-sec/ssl-baseline/tree/1.6.0) (2020-03-13)
 
@@ -69,7 +71,6 @@
 
 - Bump version to 1.4.0 and switch to inspec 3 for check [\#26](https://github.com/dev-sec/ssl-baseline/pull/26) ([alexpop](https://github.com/alexpop))
 - Update issue templates [\#23](https://github.com/dev-sec/ssl-baseline/pull/23) ([rndmh3ro](https://github.com/rndmh3ro))
-- avoid inspec depricated warning in inspec version 1.51.18 [\#19](https://github.com/dev-sec/ssl-baseline/pull/19) ([Viktor-ret](https://github.com/Viktor-ret))
 - control for robotattack [\#18](https://github.com/dev-sec/ssl-baseline/pull/18) ([supergicko](https://github.com/supergicko))
 - v-update minimum inspec version to \>=1.21.0  [\#16](https://github.com/dev-sec/ssl-baseline/pull/16) ([supergicko](https://github.com/supergicko))
 - use recommended spdx license identifier [\#14](https://github.com/dev-sec/ssl-baseline/pull/14) ([chris-rock](https://github.com/chris-rock))
