@@ -92,7 +92,7 @@ end
 control 'ssl2' do
   title 'Disable SSL 2 from all exposed SSL ports.'
   impact 1.0
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -107,7 +107,7 @@ end
 control 'ssl3' do
   title 'Disable SSL 3 from all exposed SSL ports.'
   impact 1.0
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -122,7 +122,7 @@ end
 control 'tls1.0' do
   title 'Disable TLS 1.0 on exposed ports.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -137,7 +137,7 @@ end
 control 'tls1.1' do
   title 'Disable TLS 1.1 on exposed ports.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -152,7 +152,7 @@ end
 control 'tls1.2' do
   title 'Enable TLS 1.2 on exposed ports.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -171,7 +171,7 @@ end
 control 'kx-ecdh' do
   title 'Enable ECDH as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -186,7 +186,7 @@ end
 control 'kx-rsa' do
   title 'Disable RSA as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -201,7 +201,7 @@ end
 control 'kx-dh' do
   title 'Disable DH as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -216,7 +216,7 @@ end
 control 'kx-krb5' do
   title 'Disable KRB5 as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -231,7 +231,7 @@ end
 control 'kx-psk' do
   title 'Disable PSK as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -246,7 +246,7 @@ end
 control 'kx-gostr' do
   title 'Disable GOSTR as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -261,7 +261,7 @@ end
 control 'kx-srp' do
   title 'Disable SRP as KX from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -281,7 +281,7 @@ end
 control 'au-ecdsa-rsa' do
   title 'Enable ECDSA or RSA as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -296,7 +296,7 @@ end
 control 'au-anon' do
   title 'Disable ANON as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -311,7 +311,7 @@ end
 control 'au-dss' do
   title 'Disable DSS as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -326,7 +326,7 @@ end
 control 'au-psk' do
   title 'Disable PSK as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -341,7 +341,7 @@ end
 control 'au-export' do
   title 'Disable EXPORT as AU from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -362,7 +362,7 @@ end
 control 'enc-aes-gcm-chacha20' do
   title 'Enable AES256 or AES128 or AES256-GCM or AES128-GCM or CHACHA20 as Enc'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -377,7 +377,7 @@ end
 control 'enc-cbc' do
   title 'Disable CBC as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -392,7 +392,7 @@ end
 control 'enc-rc4' do
   title 'Disable RC4 as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -407,7 +407,7 @@ end
 control 'enc-export' do
   title 'Disable EXPORT as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -422,7 +422,7 @@ end
 control 'enc-des' do
   title 'Disable DES, 3DES as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -437,7 +437,7 @@ end
 control 'enc-enull' do
   title 'Disable eNULL as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -452,7 +452,7 @@ end
 control 'enc-camellia' do
   title 'Disable CAMELLIA as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -467,7 +467,7 @@ end
 control 'enc-seed' do
   title 'Disable SEED as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -482,7 +482,7 @@ end
 control 'enc-idea' do
   title 'Disable IDEA as ENC from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -497,7 +497,7 @@ end
 control 'enc-aes-ccm' do
   title 'Disable AES-CCM from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -517,7 +517,7 @@ end
 control 'mac-sha384-sha256-poly1305' do
   title 'Enable SHA384 or SHA256 or POLY1305 as Mac from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -532,7 +532,7 @@ end
 control 'mac-md5' do
   title 'Disable MD5 Mac from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -547,7 +547,7 @@ end
 control 'mac-sha' do
   title 'Disable SHA(1) Mac from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -562,7 +562,7 @@ end
 control 'mac-null' do
   title 'Disable NULL Mac from all exposed SSL/TLS ports and versions.'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
@@ -580,7 +580,7 @@ control 'robotattack' do
   ref "Paper: Return Of Bleichenbacher's Oracle Threat (ROBOT)", url: 'https://ia.cr/2017/1189'
   tag 'sslattack', 'tlsattack'
   impact 0.5
-  only_if { sslports.!empty? }
+  only_if { !sslports.empty? }
 
   sslports.each do |sslport|
     # create a description
