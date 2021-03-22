@@ -1,11 +1,16 @@
 # Changelog
 
-## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2021-02-06)
+## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2021-03-22)
 
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.3...1.6.4)
 
+**Closed issues:**
+
+- undefined method `empty?' for \#\<Inspec::Rule:0x00005607e634ae88\> [\#40](https://github.com/dev-sec/ssl-baseline/issues/40)
+
 **Merged pull requests:**
 
+- add dependency to chef-config for CI [\#42](https://github.com/dev-sec/ssl-baseline/pull/42) ([schurzi](https://github.com/schurzi))
 - correct usage of ! with empty? check [\#41](https://github.com/dev-sec/ssl-baseline/pull/41) ([schurzi](https://github.com/schurzi))
 - use version tag for changelog action [\#39](https://github.com/dev-sec/ssl-baseline/pull/39) ([schurzi](https://github.com/schurzi))
 - Fix lint [\#38](https://github.com/dev-sec/ssl-baseline/pull/38) ([schurzi](https://github.com/schurzi))
