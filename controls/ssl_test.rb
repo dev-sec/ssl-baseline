@@ -18,31 +18,31 @@
 # author: Patrick Muench
 # author: Christoph Kappel
 
-invalid_targets = attribute(
+invalid_targets = input(
   'invalid_targets',
   value: [
     '127.0.0.1',
     '0.0.0.0',
     '::1',
-    '::'
+    '::',
   ],
   description: 'Array of IPv4 and IPv6 Addresses to exclude'
 )
 
 # Array of TCP ports to exclude from SSL checking. For example: [443, 8443]
-exclude_ports = attribute(
+exclude_ports = input(
   'exclude_ports',
   value: [],
   description: 'Array of TCP ports to exclude from SSL checking'
 )
 
-target_hostname = attribute(
+target_hostname = input(
   'target_hostname',
   value: command('hostname').stdout.strip,
   description: 'Target hostname to check'
 )
 
-force_ssl = attribute(
+force_ssl = input(
   'force_ssl',
   value: false,
   description: 'The profile should not check if SSL is enabled on every port and assume it is'
