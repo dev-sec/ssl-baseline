@@ -20,7 +20,7 @@ $ inspec exec ssl-baseline
 You can also execute the profile directly from Github:
 
 ```
-$ inspec exec https://github.com/dev-sec/ssl-baseline
+$ inspec exec https://github.com/dev-sec/ssl-baseline.git
 ```
 
 ## Covered Attacks / Weaknesses
