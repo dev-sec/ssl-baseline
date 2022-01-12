@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2021-04-24)
+## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2022-01-12)
 
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.3...1.6.4)
 
@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- use input instead of attribute [\#47](https://github.com/dev-sec/ssl-baseline/pull/47) ([micheelengronne](https://github.com/micheelengronne))
 - fix rubocop error for Rakefile [\#43](https://github.com/dev-sec/ssl-baseline/pull/43) ([schurzi](https://github.com/schurzi))
 - add dependency to chef-config for CI [\#42](https://github.com/dev-sec/ssl-baseline/pull/42) ([schurzi](https://github.com/schurzi))
 - correct usage of ! with empty? check [\#41](https://github.com/dev-sec/ssl-baseline/pull/41) ([schurzi](https://github.com/schurzi))
