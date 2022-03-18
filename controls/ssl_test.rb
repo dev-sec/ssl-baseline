@@ -24,7 +24,7 @@ invalid_targets = input(
     '127.0.0.1',
     '0.0.0.0',
     '::1',
-    '::'
+    '::',
   ],
   description: 'Array of IPv4 and IPv6 Addresses to exclude'
 )
