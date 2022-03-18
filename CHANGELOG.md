@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.5](https://github.com/dev-sec/ssl-baseline/tree/1.6.5) (2022-03-18)
+
+[Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.4...1.6.5)
+
+**Merged pull requests:**
+
+- Change linting to Cookstyle [\#48](https://github.com/dev-sec/ssl-baseline/pull/48) ([schurzi](https://github.com/schurzi))
+
 ## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2022-01-12)
 
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.3...1.6.4)
