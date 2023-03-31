@@ -1,11 +1,16 @@
 # Changelog
 
-## [1.6.5](https://github.com/dev-sec/ssl-baseline/tree/1.6.5) (2022-03-18)
+## [1.6.5](https://github.com/dev-sec/ssl-baseline/tree/1.6.5) (2023-03-31)
 
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.4...1.6.5)
 
+**Implemented enhancements:**
+
+- use centralised issue templates and workflows [\#49](https://github.com/dev-sec/ssl-baseline/pull/49) ([schurzi](https://github.com/schurzi))
+
 **Merged pull requests:**
 
+- Configure Renovate [\#50](https://github.com/dev-sec/ssl-baseline/pull/50) ([renovate[bot]](https://github.com/apps/renovate))
 - Change linting to Cookstyle [\#48](https://github.com/dev-sec/ssl-baseline/pull/48) ([schurzi](https://github.com/schurzi))
 
 ## [1.6.4](https://github.com/dev-sec/ssl-baseline/tree/1.6.4) (2022-01-12)
