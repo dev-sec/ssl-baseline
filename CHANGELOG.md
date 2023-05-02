@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.6.5](https://github.com/dev-sec/ssl-baseline/tree/1.6.5) (2023-03-31)
+## [1.6.5](https://github.com/dev-sec/ssl-baseline/tree/1.6.5) (2023-05-02)
 
 [Full Changelog](https://github.com/dev-sec/ssl-baseline/compare/1.6.4...1.6.5)
 
@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- add spellchecking with codespell [\#51](https://github.com/dev-sec/ssl-baseline/pull/51) ([schurzi](https://github.com/schurzi))
 - Configure Renovate [\#50](https://github.com/dev-sec/ssl-baseline/pull/50) ([renovate[bot]](https://github.com/apps/renovate))
 - Change linting to Cookstyle [\#48](https://github.com/dev-sec/ssl-baseline/pull/48) ([schurzi](https://github.com/schurzi))
 
@@ -91,7 +92,7 @@
 
 - Bump version to 1.4.0 and switch to inspec 3 for check [\#26](https://github.com/dev-sec/ssl-baseline/pull/26) ([alexpop](https://github.com/alexpop))
 - Update issue templates [\#23](https://github.com/dev-sec/ssl-baseline/pull/23) ([rndmh3ro](https://github.com/rndmh3ro))
-- avoid inspec depricated warning in inspec version 1.51.18 [\#19](https://github.com/dev-sec/ssl-baseline/pull/19) ([Viktor-ret](https://github.com/Viktor-ret))
+- avoid inspec deprecated warning in inspec version 1.51.18 [\#19](https://github.com/dev-sec/ssl-baseline/pull/19) ([Viktor-ret](https://github.com/Viktor-ret))
 - control for robotattack [\#18](https://github.com/dev-sec/ssl-baseline/pull/18) ([supergicko](https://github.com/supergicko))
 - v-update minimum inspec version to \>=1.21.0  [\#16](https://github.com/dev-sec/ssl-baseline/pull/16) ([supergicko](https://github.com/supergicko))
 - use recommended spdx license identifier [\#14](https://github.com/dev-sec/ssl-baseline/pull/14) ([chris-rock](https://github.com/chris-rock))
